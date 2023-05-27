@@ -1,5 +1,7 @@
 <?php
 
+require_once 'model/gallery.php';
+
 $isSent	= false;
 $err	= '';
 
@@ -10,11 +12,10 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
 		$err = 'Image was not sent.';
 	}	else if( ! $image['size'] ){
 		$err = 'File is too large or incorrect.';
-	}	else if( ! preg_match( '/^.*\.(png|jpg|jpeg|gif|webp|avif|svg)$/i', $image['name'] ) ){
+	}	else if( ! checkImageExtension( $image['name'] ) ){
 		$err = 'Extension not allowed.';
 	}	else{
-		$parts		= explode( '.', $image['name'] );
-		$ext		= end( $parts );
+		$ext		= getFileExtension( $image['name'] );
 		$tmp_name	= time() . '_' . mt_rand( 1, 100000000 ) . '_' . mt_rand( 1, 100000000 ) . ".$ext";
 		copy( $image['tmp_name'], "images/$tmp_name" );
 		$isSent = true;
