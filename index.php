@@ -13,7 +13,10 @@ $images	= array_values(
 	foreach( $images as $img ){
 		?>
 		<div class="gallery-item" style="width: 100px; margin-bottom: 10px">
-			<img style="width: 100%; height: auto" src="images/<?=$img?>" alt="<?php echo preg_replace( '/\.[^.]+$/', '', $img ) ?>" />
+			<img
+				style="width: 100%; height: auto" src="images/<?=$img?>"
+				alt="<?php echo preg_replace( '/\.[^.]+$/', '', $img ) ?>"
+			/>
 		</div>
 		<?php
 	}
